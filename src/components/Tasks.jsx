@@ -4,7 +4,7 @@ import { VscArrowRight } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
 const Tasks = () => {
-  const myList =useRef()
+  const myList = useRef();
   const [CurrList, setCurrList] = useState("All");
   {
     console.log(CurrList);
@@ -32,8 +32,8 @@ const Tasks = () => {
     dispatch({ type: "UPDATE", pos: position, nTask: nTask });
   };
   return (
-    <div className="flex h-[90%]">
-      <div className="relative w-[50%] flex flex-row h-[80%]  ">
+    <div className="flex  h-[90%] max-lg:flex-col max-lg:justify-center">
+      <div className="relative w-[50%] flex flex-row   ">
         <div className="flex flex-col  mt-20  ml-9  px-8 h-[10%]  ">
           <motion.h1
             className="text-4xl md:text-6xl text-gray-100 mb-10 font-bold w-[480px]"
@@ -60,19 +60,25 @@ const Tasks = () => {
                 initial={{ opacity: 0, x: -120 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 2, duration: 2 }}
-                whileHover={{ scale: 1.2 }}
-                // whileTap={{ scale: 0.8 }}
+            
                 className="text-center ml-2 flex justify-center items-center w-[50px] rounded-full bg-green-500"
                 onClick={addHandler}
               >
                 <VscArrowRight />
               </motion.button>
             </motion.div>
-            <div className="filter flex mt-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 1, transition: 15 }}
+              className="filter flex mt-6"
+            >
               <motion.input
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: 2, transition: 3 }}
+                transition={{ delay: 1, transition: 3 }}
+                whileHover={{ scale:1.2}}
+                whileHoverTransition={{ scale:1.2}}
                 type="button"
                 value={"All"}
                 className="btn"
@@ -83,7 +89,7 @@ const Tasks = () => {
               <motion.input
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: 4, transition: 3 }}
+                transition={{ delay: 1.5, transition: 3 }}
                 type="button"
                 value={"Working."}
                 className="btnA"
@@ -94,7 +100,7 @@ const Tasks = () => {
               <motion.input
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: 6, transition: 3 }}
+                transition={{ delay: 2, transition: 3 }}
                 type="button"
                 value={"Done"}
                 className="btnC"
@@ -102,20 +108,27 @@ const Tasks = () => {
                   setCurrList("Completed");
                 }}
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
       <motion.div
-       ref={myList}
+        ref={myList}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1 ,delay:2 }}
-        className="relative w-[50%] flex flex-col   p-10   shadow-2xl   rounded-2xl listTasks "
+        transition={{ duration: 5, delay: 2 }}
+        className="relative w-[50%] flex flex-col  p-10   shadow-2xl   rounded-2xl listTasks max-lg:w-[100%] "
       >
         {Tasks.map((e, i) => {
           return e.status == CurrList ? (
-            <motion.div className={CurrList}>
+            <motion.div
+            drag={true}
+                dragConstraints={myList}
+                initial={{ x: -40 }}
+                animate={{ x: 0 }}
+                transition={{ duration: 3, delay: i * 0.08 }}
+             className={CurrList}
+             >
               <div
                 onClick={() => {
                   changeStatusHandler(i, e.status, e.task);
@@ -134,7 +147,7 @@ const Tasks = () => {
                 dragConstraints={myList}
                 initial={{ x: -40 }}
                 animate={{ x: 0 }}
-                transition={{ duration: 3 , delay: i * .8}}
+                transition={{ duration: 3, delay: i * 0.000004 }}
                 className={e.status}
               >
                 <div
