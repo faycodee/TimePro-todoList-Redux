@@ -3,9 +3,10 @@
 @tailwind utilities;
 body {
   cursor: none;
+  background-color: rgb(212, 212, 212);
 }
 input::placeholder {
-  color: black;
+  color: rgb(0, 0, 0);
   opacity: 0.5;
 }
 

@@ -44,19 +44,23 @@ const Tasks = () => {
             Your <span className="text-green-500 ">Tasks </span>
           </motion.h1>
           <div>
-            <motion.div className="flex">
-              <input
+            <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.8, delay: 0.7 }}
+             className="flex">
+              <motion.input
                 ref={Task}
                 type="text"
                 placeholder=" Add a new Task"
                 className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
               />
-              <button
-                className="text-center flex justify-center items-center w-[50px] rounded-full bg-green-500"
+              <motion.button
+                className="text-center ml-2 flex justify-center items-center w-[50px] rounded-full bg-green-500"
                 onClick={addHandler}
               >
                 <VscArrowRight />
-              </button>
+              </motion.button>
             </motion.div>
             <div className="filter flex mt-6">
               <input
