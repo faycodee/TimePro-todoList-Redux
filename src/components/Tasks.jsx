@@ -4,7 +4,7 @@ import { VscArrowRight } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
 const Tasks = () => {
-
+  const myList =useRef()
   const [CurrList, setCurrList] = useState("All");
   {
     console.log(CurrList);
@@ -18,18 +18,18 @@ const Tasks = () => {
     dispatch({ type: "ADD", newTask: obj });
     alert("Added successfully");
   };
-  const sort =()=>{
-    dispatch({type:"SORT"})
-  }
-  sort()
+  const sort = () => {
+    dispatch({ type: "SORT" });
+  };
+  sort();
   const deleteHandler = (position) => {
     confirm("Are you sure ?") && dispatch({ type: "DELETE", pos: position });
   };
-  const changeStatusHandler = (position,sts,tsk) => {
+  const changeStatusHandler = (position, sts, tsk) => {
     // alert(sts)
-    let nTask = { task: tsk, status: (sts=="Active")?"Completed":"Active" }
+    let nTask = { task: tsk, status: sts == "Active" ? "Completed" : "Active" };
     // alert(nTask.status)
-    dispatch({ type: "UPDATE", pos: position , nTask:nTask });
+    dispatch({ type: "UPDATE", pos: position, nTask: nTask });
   };
   return (
     <div className="flex h-[90%]">
@@ -45,10 +45,11 @@ const Tasks = () => {
           </motion.h1>
           <div>
             <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.8, delay: 0.7 }}
-             className="flex">
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.8, delay: 0.7 }}
+              className="flex"
+            >
               <motion.input
                 ref={Task}
                 type="text"
@@ -56,6 +57,11 @@ const Tasks = () => {
                 className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
               />
               <motion.button
+                initial={{ opacity: 0, x: -120 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 2, duration: 2 }}
+                whileHover={{ scale: 1.2 }}
+                // whileTap={{ scale: 0.8 }}
                 className="text-center ml-2 flex justify-center items-center w-[50px] rounded-full bg-green-500"
                 onClick={addHandler}
               >
@@ -63,7 +69,10 @@ const Tasks = () => {
               </motion.button>
             </motion.div>
             <div className="filter flex mt-6">
-              <input
+              <motion.input
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 2, transition: 3 }}
                 type="button"
                 value={"All"}
                 className="btn"
@@ -71,7 +80,10 @@ const Tasks = () => {
                   setCurrList("All");
                 }}
               />
-              <input
+              <motion.input
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 4, transition: 3 }}
                 type="button"
                 value={"Working."}
                 className="btnA"
@@ -79,7 +91,10 @@ const Tasks = () => {
                   setCurrList("Active");
                 }}
               />
-              <input
+              <motion.input
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 6, transition: 3 }}
                 type="button"
                 value={"Done"}
                 className="btnC"
@@ -90,29 +105,53 @@ const Tasks = () => {
             </div>
           </div>
         </div>
-        <div className="h-full flex flex-col justify-center mt-20  ml-9  px-8 w-[90%]"></div>
       </div>
-      <div className="relative w-[50%] flex flex-col   p-10   shadow-2xl   rounded-2xl listTasks">
+      <motion.div
+       ref={myList}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 ,delay:2 }}
+        className="relative w-[50%] flex flex-col   p-10   shadow-2xl   rounded-2xl listTasks "
+      >
         {Tasks.map((e, i) => {
           return e.status == CurrList ? (
-            <div className={CurrList}>
-              <div onClick={
-                ()=>{changeStatusHandler(i,e.status,e.task)}
-                } className="w-full h-full"> {e.task}</div>
-              <button onClick={() => deleteHandler(i)} >X</button>
-            </div>
+            <motion.div className={CurrList}>
+              <div
+                onClick={() => {
+                  changeStatusHandler(i, e.status, e.task);
+                }}
+                className="w-full h-full"
+              >
+                {" "}
+                {e.task}
+              </div>
+              <button onDoubleClick={() => deleteHandler(i)}>X</button>
+            </motion.div>
           ) : (
             CurrList == "All" && (
-              <div className={e.status}>
-                <div onClick={
-                ()=>{changeStatusHandler(i,e.status,e.task)}
-                } className="w-full h-full" > {e.task}</div>
+              <motion.div
+                drag={true}
+                dragConstraints={myList}
+                initial={{ x: -40 }}
+                animate={{ x: 0 }}
+                transition={{ duration: 3 , delay: i * .8}}
+                className={e.status}
+              >
+                <div
+                  onDoubleClick={() => {
+                    changeStatusHandler(i, e.status, e.task);
+                  }}
+                  className="w-full h-full"
+                >
+                  {" "}
+                  {e.task}
+                </div>
                 <button onClick={() => deleteHandler(i)}>X</button>
-              </div>
+              </motion.div>
             )
           );
         })}
-      </div>
+      </motion.div>
     </div>
   );
 };
