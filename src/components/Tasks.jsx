@@ -52,7 +52,7 @@ const Tasks = () => {
                 className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
               />
               <button
-                className="text-center flex justify-center items-center w-[50px] rounded-full bg-green-400"
+                className="text-center flex justify-center items-center w-[50px] rounded-full bg-green-500"
                 onClick={addHandler}
               >
                 <VscArrowRight />
