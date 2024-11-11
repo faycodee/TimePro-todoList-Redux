@@ -52,7 +52,7 @@ const App = () => {
                   autoPlay
                   loop
                   muted
-                  className="absolute inset-0  w-full h-full object-cover"
+                  className="absolute inset-0  w-full h-full object-cover max-lg:h-screen "
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1.5, delay: 0.5 }}
@@ -111,8 +111,8 @@ const Nav = () => {
 
 const Hero = () => {
   return (
-    <div className="relative h-[90%] flex flex-row ">
-      <div className="h-full flex flex-col justify-center   px-8 w-[50%]">
+    <div className="relative h-[90%] flex flex-row  max-lg:flex-col max-lg:items-center ">
+      <div className="h-full flex flex-col justify-center    px-8 w-[50%] max-lg:w-[100%] max-lg:mt-[130px] ">
         <motion.h1
           className="text-4xl md:text-6xl text-gray-100 font-bold "
           initial={{ opacity: 0, y: -60 }}
@@ -149,7 +149,7 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 5, delay: 1.2 }}
-        className="h-full flex flex-col justify-center   px-8"
+        className="h-full flex flex-col justify-center   px-8  "
       >
         {/* <img
          initial={{ opacity: 0 }}
