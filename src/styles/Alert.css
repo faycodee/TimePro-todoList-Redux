@@ -1,21 +1,19 @@
-
 .alert {
   background-color: #e0f7fa;
-  color: #000000; 
+  color: #000000;
   position: absolute;
   padding: 15px 20px;
   border-radius: 8px;
   margin: 20px 0;
   width: 30%;
   display: flex;
-  bottom: 100px ;
+  bottom: 100px;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 100;
   overflow: hidden;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  
 }
 .divParentAlert {
   height: 100px;
@@ -23,7 +21,6 @@
   justify-content: center;
   position: absolute;
   overflow: hidden;
-
 }
 
 /* Hover Effect */
@@ -45,6 +42,5 @@
 }
 
 .alert button:hover {
-  color: #00796b; 
+  color: #00796b;
 }
-

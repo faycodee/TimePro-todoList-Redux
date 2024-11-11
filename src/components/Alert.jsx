@@ -2,9 +2,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Alert = ({ message, handlerClose, bgcolorr, colorr }) => {
   const alertVariants = {
-    initial: { opacity: 0, x: -700 , },
+    initial: { opacity: 0, x: -500 , },
     animate: { opacity: 1, x: 10 },
-    exit: { opacity: 0, x: -700 },
+    exit: { opacity: 0, x: -500 },
   };
 
   return (
