@@ -3,11 +3,11 @@ import { produce } from "immer";
 import { Return } from "three/webgpu";
 const mystate = {
   Tasks: [
-    { task: "learn Three js", status: "Active" },
-    { task: "learn GSAP js", status: "Active" },
-    { task: "learn Parallax js", status: "Active" },
-    { task: "learn React js", status: "Completed" },
-    { task: "learn FramerMotion js", status: "Completed" },
+    { task: "learn Three js", status: "Active" ,date:"11-11-2024"},
+    { task: "learn GSAP js", status: "Active" ,date:"11-11-2024"},
+    { task: "learn Parallax js", status: "Active" ,date:"11-11-2024"},
+    { task: "learn React js", status: "Completed",date:"25-10-2024" },
+    { task: "learn FramerMotion js", status: "Completed" ,date:"2-10-2024"},
   ],
   Alert: {
     showAlert: false,

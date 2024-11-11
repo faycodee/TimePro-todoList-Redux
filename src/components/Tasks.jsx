@@ -5,23 +5,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
 const Tasks = () => {
   const myList = useRef();
-
   const [CurrList, setCurrList] = useState("All");
+  const [CurrDate, setDate] = useState(() => {  
+    const now = new Date();  
+    const year = now.getFullYear();  
+    const month = (now.getMonth() )
+    const day = (now.getDate())
+    return `${year}-${month}-${day}`;  
+  });  
+
+
+
   {
     console.log(CurrList);
   }
   const Task = useRef();
+  const DateTxt = useRef();
   const Tasks = useSelector((state) => state.Tasks);
   const dispatch = useDispatch();
   console.log(Tasks);
   const addHandler = () => {
-
-    let obj = { task: Task.current.value, status: "Active" };
+    let obj = { task: Task.current.value, status: "Active" ,date:myFormatDate(DateTxt.current.value)};
     dispatch({ type: "ADD", newTask: obj });
-    dispatch({ type: "SHOWALERT" , msg:"Add Successfuly !"});
-    setTimeout(()=>dispatch({ type: "HIDEALERT"}),3000)
-    
+    dispatch({ type: "SHOWALERT", msg: "Add Successfuly !" });
+    setTimeout(() => dispatch({ type: "HIDEALERT" }), 3000);
   };
+  const  myFormatDate=(inputDate) =>{  
+    const [year, month, day] = inputDate.split("-");  
+    return `${day}-${month}-${year}`;  
+}  
+
   const sort = () => {
     dispatch({ type: "SORT" });
   };
@@ -29,13 +42,17 @@ const Tasks = () => {
   const deleteHandler = (position) => {
     confirm("Are you sure ?") && dispatch({ type: "DELETE", pos: position });
   };
-  const changeStatusHandler = (position, sts, tsk) => {
+  const changeStatusHandler = (position, sts, tsk ,dt) => {
     // alert(sts)
-    let nTask = { task: tsk, status: sts == "Active" ? "Completed" : "Active" };
+    let nTask = { task: tsk, status: sts == "Active" ? "Completed" : "Active" ,date:dt};
     // alert(nTask.status)
     dispatch({ type: "UPDATE", pos: position, nTask: nTask });
-    ( dispatch({ type: "SHOWALERT" , msg:nTask.status== "Completed" ? "Done !" : "Working ..." ,clr:sts=="Active"?"rgb(214, 255, 152)":"rgb(255, 152, 152)"  }),
-    setTimeout(()=>dispatch({ type: "HIDEALERT"}),3000))
+    dispatch({
+      type: "SHOWALERT",
+      msg: nTask.status == "Completed" ? "Done !" : "Working ...",
+      clr: sts == "Active" ? "rgb(214, 255, 152)" : "rgb(255, 152, 152)",
+    }),
+      setTimeout(() => dispatch({ type: "HIDEALERT" }), 3000);
   };
   return (
     <div className="flex  h-[90%] max-lg:flex-col max-lg:justify-center">
@@ -56,22 +73,31 @@ const Tasks = () => {
               transition={{ duration: 1.8, delay: 0.7 }}
               className="flex"
             >
-              <motion.input
-                ref={Task}
-                type="text"
-                placeholder=" Add a new Task"
-                className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
-              />
-              <motion.button
-                initial={{ opacity: 0, x: -120 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 2, duration: 2 }}
-            
-                className="text-center ml-2 flex justify-center items-center w-[50px] rounded-full bg-green-500"
-                onClick={addHandler}
-              >
-                <VscArrowRight />
-              </motion.button>
+              <div>
+                <motion.input
+                  ref={Task}
+                  type="text"
+                  placeholder=" Add a new Task"
+                  className="py-3  mb-1 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
+                />
+                <div className="flex">
+                  <motion.input
+                    ref={DateTxt}
+                    type="date"
+                    min={CurrDate}
+                    className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
+                  />
+                  <motion.button
+                    initial={{ opacity: 0, x: -120 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 2, duration: 2 }}
+                    className="text-center ml-2 flex justify-center items-center w-[50px] rounded-full text-white bg-black"
+                    onClick={addHandler}
+                  >
+                    <VscArrowRight />
+                  </motion.button>
+                </div>
+              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -83,8 +109,8 @@ const Tasks = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 1, transition: 3 }}
-                whileHover={{ scale:1.2}}
-                whileHoverTransition={{ scale:1.2}}
+                whileHover={{ scale: 1.2 }}
+                whileHoverTransition={{ scale: 1.2 }}
                 type="button"
                 value={"All"}
                 className="btn"
@@ -128,21 +154,22 @@ const Tasks = () => {
         {Tasks.map((e, i) => {
           return e.status == CurrList ? (
             <motion.div
-            drag={true}
-                dragConstraints={myList}
-                initial={{ x: -40 }}
-                animate={{ x: 0 }}
-                transition={{ duration: 3, delay: i * 0.08 }}
-             className={CurrList}
-             >
+              drag={true}
+              dragConstraints={myList}
+              initial={{ x: -40 }}
+              animate={{ x: 0 }}
+              transition={{ duration: 3, delay: i * 0.08 }}
+              className={CurrList}
+            >
               <div
                 onClick={() => {
-                  changeStatusHandler(i, e.status, e.task);
+                  changeStatusHandler(i, e.status, e.task ,e.date);
                 }}
-                className="w-full h-full"
+                className="w-full h-full flex jus"
               >
                 {" "}
                 {e.task}
+                {e.date}
               </div>
               <button onDoubleClick={() => deleteHandler(i)}>X</button>
             </motion.div>
@@ -157,15 +184,17 @@ const Tasks = () => {
                 className={e.status}
               >
                 <div
+                
                   onDoubleClick={() => {
-                    changeStatusHandler(i, e.status, e.task);
+                    changeStatusHandler(i, e.status, e.task,e.date);
                   }}
-                  className="w-full h-full"
+                  className="w-full h-full flex justify-between"
                 >
                   {" "}
-                  {e.task}
+                <span className="font-mono font-semibold">  {e.task}</span>
+                 <small className="mr-[50px] translate-y-[23px] opacity-[50%]"> {e.date}</small>
                 </div>
-                <button onClick={() => deleteHandler(i)}>X</button>
+                <button onClick={() => deleteHandler(i)} className="bg-black text-white p-1 rounded-full w-10 h-10">X</button>
               </motion.div>
             )
           );
