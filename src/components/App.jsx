@@ -15,6 +15,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
   const showAlert = useSelector((state) => state.showAlert);
+  const msgAlert = useSelector((state) => state.msgAlert);
+  const msgBg = useSelector((state) => state.msgBg);
   const dispatch = useDispatch();
   console.log(showAlert);
   const handleShowAlert = () => {
@@ -23,24 +25,17 @@ const App = () => {
       dispatch({ type: "HIDEALERT" });
     }, 3000);
   };
-  
+
   const handlerClose = () => {
-    dispatch({ type: "HIDEALERT" })
-  
+    dispatch({ type: "HIDEALERT" });
   };
 
   return (
     <BrowserRouter>
-      {showAlert && (
-        <Alert
-          message="This is an alert message!"
-          onClose={handlerClose}
-          bgcolorr={"red"}
-          
-        />
-      )}
       <Cursor />
-
+      {showAlert && (
+        <Alert message={msgAlert} onClose={handlerClose} bgcolorr={msgBg} />
+      )}
       <div className="relative h-screen">
         <header>
           <Nav />
@@ -50,7 +45,6 @@ const App = () => {
             path="/"
             element={
               <>
-                <button onClick={handleShowAlert}>hiiiiiiiiiiiiiiii</button>
                 <Hero />
                 <motion.video
                   style={{ zIndex: -1 }}

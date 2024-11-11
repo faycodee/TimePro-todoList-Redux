@@ -9,7 +9,11 @@ const mystate = {
     { task: "learn React js", status: "Completed" },
     { task: "learn FramerMotion js", status: "Completed" },
   ],
-  showAlert: false,
+  Alert: {
+    showAlert: false,
+    msgAlert: "HIIII WELCOME",
+    msgBg: "#e0f7fa",
+  },
 };
 const Render = (state = mystate, action) => {
   switch (action.type) {
@@ -32,11 +36,14 @@ const Render = (state = mystate, action) => {
     case "SHOWALERT":
       return produce(state, (sd) => {
         sd.showAlert = true;
+        sd.msgAlert = action.msg;
+        sd.msgBg = action.clr;
       });
     case "HIDEALERT":
       return produce(state, (sd) => {
         sd.showAlert = false;
       });
+    
 
     default:
       return state;

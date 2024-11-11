@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
 const Tasks = () => {
   const myList = useRef();
+
   const [CurrList, setCurrList] = useState("All");
   {
     console.log(CurrList);
@@ -14,9 +15,12 @@ const Tasks = () => {
   const dispatch = useDispatch();
   console.log(Tasks);
   const addHandler = () => {
+
     let obj = { task: Task.current.value, status: "Active" };
     dispatch({ type: "ADD", newTask: obj });
-    alert("Added successfully");
+    dispatch({ type: "SHOWALERT" , msg:"Add Successfuly !"});
+    setTimeout(()=>dispatch({ type: "HIDEALERT"}),3000)
+    
   };
   const sort = () => {
     dispatch({ type: "SORT" });
@@ -30,6 +34,8 @@ const Tasks = () => {
     let nTask = { task: tsk, status: sts == "Active" ? "Completed" : "Active" };
     // alert(nTask.status)
     dispatch({ type: "UPDATE", pos: position, nTask: nTask });
+    ( dispatch({ type: "SHOWALERT" , msg:nTask.status== "Completed" ? "Done !" : "Working ..." ,clr:sts=="Active"?"rgb(214, 255, 152)":"rgb(255, 152, 152)"  }),
+    setTimeout(()=>dispatch({ type: "HIDEALERT"}),3000))
   };
   return (
     <div className="flex  h-[90%] max-lg:flex-col max-lg:justify-center">
