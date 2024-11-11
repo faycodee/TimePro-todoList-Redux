@@ -9,6 +9,7 @@ const mystate = {
     { task: "learn React js", status: "Completed" },
     { task: "learn FramerMotion js", status: "Completed" },
   ],
+  showAlert: false,
 };
 const Render = (state = mystate, action) => {
   switch (action.type) {
@@ -21,13 +22,21 @@ const Render = (state = mystate, action) => {
         darftS.Tasks.splice(action.pos, 1);
       });
     case "UPDATE":
-        return produce(state,(ds)=>{
-            ds.Tasks.splice(action.pos, 1,action.nTask);
-        })
+      return produce(state, (ds) => {
+        ds.Tasks.splice(action.pos, 1, action.nTask);
+      });
     case "SORT":
-        return  produce(state,ds=>{
-            ds.Tasks.sort((a, b) => a.status.localeCompare(b.status))
-        })
+      return produce(state, (ds) => {
+        ds.Tasks.sort((a, b) => a.status.localeCompare(b.status));
+      });
+    case "SHOWALERT":
+      return produce(state, (sd) => {
+        sd.showAlert = true;
+      });
+    case "HIDEALERT":
+      return produce(state, (sd) => {
+        sd.showAlert = false;
+      });
 
     default:
       return state;

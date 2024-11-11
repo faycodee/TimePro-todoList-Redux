@@ -2,19 +2,45 @@ import { motion } from "framer-motion";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import "../styles/index.css";
 import "../styles/Cursor.css";
+import "../styles/Alert.css";
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
+import { useState } from "react";
 import { Environment, OrbitControls, ContactShadows } from "@react-three/drei";
-// import Model from "../../public/Earth"
 import Model from "../../public/Time";
-import Tasks from './Tasks';
-import Cursor from './Cursor';
-
+import Tasks from "./Tasks";
+import Cursor from "./Cursor";
+import Alert from "./Alert";
+import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
+  const showAlert = useSelector((state) => state.showAlert);
+  const dispatch = useDispatch();
+  console.log(showAlert);
+  const handleShowAlert = () => {
+    dispatch({ type: "SHOWALERT" });
+    setTimeout(() => {
+      dispatch({ type: "HIDEALERT" });
+    }, 3000);
+  };
+  
+  const handlerClose = () => {
+    dispatch({ type: "HIDEALERT" })
+  
+  };
+
   return (
     <BrowserRouter>
-    < Cursor/>
+      {showAlert && (
+        <Alert
+          message="This is an alert message!"
+          onClose={handlerClose}
+          bgcolorr={"red"}
+          
+        />
+      )}
+      <Cursor />
+
       <div className="relative h-screen">
         <header>
           <Nav />
@@ -24,6 +50,7 @@ const App = () => {
             path="/"
             element={
               <>
+                <button onClick={handleShowAlert}>hiiiiiiiiiiiiiiii</button>
                 <Hero />
                 <motion.video
                   style={{ zIndex: -1 }}
@@ -43,8 +70,8 @@ const App = () => {
             path="/tasks"
             element={
               <>
-               <Tasks/>
-               <motion.video
+                <Tasks />
+                <motion.video
                   style={{ zIndex: -1 }}
                   src="./bg2.mp4"
                   autoPlay
@@ -55,8 +82,6 @@ const App = () => {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1.5, delay: 0.5 }}
                 ></motion.video>
-         
-
               </>
             }
           />
@@ -157,7 +182,6 @@ const Hero = () => {
     </div>
   );
 };
-
 
 export { Nav, Hero };
 
