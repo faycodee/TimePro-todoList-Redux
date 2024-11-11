@@ -1,31 +1,28 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 
-const Alert = ({ message, handlerClose,  bgcolorr ,colorr }) => {
+const Alert = ({ message, handlerClose, bgcolorr, colorr }) => {
   const alertVariants = {
-    initial: { opacity: 0, y: -20 },
-    animate: { opacity: 1, y: 10 },
-    exit: { opacity: 0, y: -20 },
+    initial: { opacity: 0, x: -700 , },
+    animate: { opacity: 1, x: 10 },
+    exit: { opacity: 0, x: -700 },
   };
 
   return (
     <AnimatePresence>
+    
       <motion.div
         variants={alertVariants}
         initial="initial"
         animate="animate"
         exit="exit"
-        className="w-full flex justify-center"
+        className="alert"
+        style={{ backgroundColor: bgcolorr }}
+        transition={{ duration: 0.8, ease: "easeIn" }}
       >
-        <motion.div
-          className="alert"
-          style={{ backgroundColor: bgcolorr }}
-          transition={{ duration: 0.8, ease: "anticipate" }}
-        >
-          <span >{message}</span>
-          <button onClick={()=>handlerClose()} >Close</button>
-        </motion.div>
+        <span>{message}</span>
+        <button onClick={() => handlerClose()}>Close</button>
       </motion.div>
+
     </AnimatePresence>
   );
 };
