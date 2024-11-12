@@ -14,8 +14,6 @@ const Tasks = () => {
     return `${year}-${month}-${day}`;  
   });  
 
-
-
   {
     console.log(CurrList);
   }
@@ -161,17 +159,18 @@ const Tasks = () => {
               transition={{ duration: 3, delay: i * 0.08 }}
               className={CurrList}
             >
-              <div
-                onClick={() => {
-                  changeStatusHandler(i, e.status, e.task ,e.date);
+                 <div
+                
+                onDoubleClick={() => {
+                  changeStatusHandler(i, e.status, e.task,e.date);
                 }}
-                className="w-full h-full flex jus"
+                className="w-full h-full flex justify-between"
               >
                 {" "}
-                {e.task}
-                {e.date}
+              <span className="font-mono font-semibold">  {e.task}</span>
+               <small className="mr-[50px] translate-y-[23px] opacity-[50%]"> {e.date}</small>
               </div>
-              <button onDoubleClick={() => deleteHandler(i)}>X</button>
+              <button onClick={() => deleteHandler(i)} className="bg-gray-800 text-white p-1 rounded-full w-10 h-10">X</button>
             </motion.div>
           ) : (
             CurrList == "All" && (
@@ -194,7 +193,7 @@ const Tasks = () => {
                 <span className="font-mono font-semibold">  {e.task}</span>
                  <small className="mr-[50px] translate-y-[23px] opacity-[50%]"> {e.date}</small>
                 </div>
-                <button onClick={() => deleteHandler(i)} className="bg-black text-white p-1 rounded-full w-10 h-10">X</button>
+                <button onClick={() => deleteHandler(i)} className="bg-gray-800 text-white p-1 rounded-full w-10 h-10">X</button>
               </motion.div>
             )
           );
