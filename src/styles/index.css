@@ -36,7 +36,8 @@ input::placeholder {
   margin-bottom: 0.25rem;
   align-items: center;
   background-color: rgb(214, 255, 152);
-  padding: 1.25rem;
+  padding: 1.24rem;
+
   border-radius: 20px;
   text-decoration-line: line-through;
 }
