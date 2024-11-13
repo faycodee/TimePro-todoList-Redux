@@ -12,6 +12,9 @@
   "dependencies": {
     "@react-three/drei": "^9.115.0",
     "@react-three/fiber": "^8.17.10",
+    "@schedule-x/events-service": "^2.5.0",
+    "@schedule-x/react": "^2.4.2",
+    "@schedule-x/theme-default": "^2.5.0",
     "framer-motion": "^11.11.11",
     "immer": "^10.1.1",
     "react": "^18.3.1",
