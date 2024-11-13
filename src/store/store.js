@@ -3,11 +3,11 @@ import { produce } from "immer";
 import { Return } from "three/webgpu";
 const mystate = {
   Tasks: [
-    { task: "learn Three js", status: "Active" ,date:"11-11-2024"},
-    { task: "learn GSAP js", status: "Active" ,date:"11-11-2024"},
-    { task: "learn Parallax js", status: "Active" ,date:"11-11-2024"},
-    { task: "learn React js", status: "Completed",date:"25-10-2024" },
-    { task: "learn FramerMotion js", status: "Completed" ,date:"2-10-2024"},
+    { task: "learn Three js", status: "Active", date: "11-11-2024" },
+    { task: "learn GSAP js", status: "Active", date: "11-11-2024" },
+    { task: "learn Parallax js", status: "Active", date: "11-11-2024" },
+    { task: "learn React js", status: "Completed", date: "25-10-2024" },
+    { task: "learn FramerMotion js", status: "Completed", date: "2-10-2024" },
   ],
   Alert: {
     showAlert: false,
@@ -43,7 +43,6 @@ const Render = (state = mystate, action) => {
       return produce(state, (sd) => {
         sd.showAlert = false;
       });
-    
 
     default:
       return state;

@@ -86,9 +86,9 @@ const App = () => {
             element={
               <>
                  <CalendarApp/> 
-                {/* <motion.video
+                <motion.video
                   style={{ zIndex: -1 }}
-                  src="./bg2.mp4"
+                  src="./bg3.mp4"
                   autoPlay
                   loop
                   muted
@@ -96,7 +96,7 @@ const App = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1.5, delay: 0.5 }}
-                ></motion.video> */}
+                ></motion.video>
               </>
             }
           />
@@ -120,10 +120,10 @@ const Nav = () => {
           <NavLink to={"/tasks"}>Tasks</NavLink>
         </li>
         <li className="hover:text-green-500 cursor-pointer transition-colors">
-          <NavLink to={"/projects"}>Projects</NavLink>
+          <NavLink to={"/calendar"}>Calendar</NavLink>
         </li>
         <li className="hover:text-green-500 cursor-pointer transition-colors">
-          <NavLink to={"/calendar"}>Calendar</NavLink>
+          <NavLink to={"/projects"}>Projects</NavLink>
         </li>
       </ul>
     </nav>

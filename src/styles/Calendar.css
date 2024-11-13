@@ -1,7 +1,11 @@
 .sx-react-calendar-wrapper {
-    width: 1200px;
+    width: 900px;
     max-width: 100vw;
-    height: 800px;
+    height: 500px;
     max-height: 90vh;
+    color: green;
+  }
+.sx-react-calendar-wrapper p {
+
     color: green;
   }

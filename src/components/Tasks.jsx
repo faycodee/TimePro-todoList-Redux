@@ -6,13 +6,13 @@ import { useRef, useState } from "react";
 const Tasks = () => {
   const myList = useRef();
   const [CurrList, setCurrList] = useState("All");
-  const [CurrDate, setDate] = useState(() => {  
-    const now = new Date();  
-    const year = now.getFullYear();  
-    const month = (now.getMonth() )
-    const day = (now.getDate())
-    return `${year}-${month}-${day}`;  
-  });  
+  const [CurrDate, setDate] = useState(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const day = now.getDate();
+    return `${year}-${month}-${day}`;
+  });
 
   {
     console.log(CurrList);
@@ -23,15 +23,19 @@ const Tasks = () => {
   const dispatch = useDispatch();
   console.log(Tasks);
   const addHandler = () => {
-    let obj = { task: Task.current.value, status: "Active" ,date:myFormatDate(DateTxt.current.value)};
+    let obj = {
+      task: Task.current.value,
+      status: "Active",
+      date: myFormatDate(DateTxt.current.value),
+    };
     dispatch({ type: "ADD", newTask: obj });
     dispatch({ type: "SHOWALERT", msg: "Add Successfuly !" });
     setTimeout(() => dispatch({ type: "HIDEALERT" }), 3000);
   };
-  const  myFormatDate=(inputDate) =>{  
-    const [year, month, day] = inputDate.split("-");  
-    return `${day}-${month}-${year}`;  
-}  
+  const myFormatDate = (inputDate) => {
+    const [year, month, day] = inputDate.split("-");
+    return `${day}-${month}-${year}`;
+  };
 
   const sort = () => {
     dispatch({ type: "SORT" });
@@ -40,9 +44,13 @@ const Tasks = () => {
   const deleteHandler = (position) => {
     confirm("Are you sure ?") && dispatch({ type: "DELETE", pos: position });
   };
-  const changeStatusHandler = (position, sts, tsk ,dt) => {
+  const changeStatusHandler = (position, sts, tsk, dt) => {
     // alert(sts)
-    let nTask = { task: tsk, status: sts == "Active" ? "Completed" : "Active" ,date:dt};
+    let nTask = {
+      task: tsk,
+      status: sts == "Active" ? "Completed" : "Active",
+      date: dt,
+    };
     // alert(nTask.status)
     dispatch({ type: "UPDATE", pos: position, nTask: nTask });
     dispatch({
@@ -159,18 +167,25 @@ const Tasks = () => {
               transition={{ duration: 3, delay: i * 0.08 }}
               className={CurrList}
             >
-                 <div
-                
+              <div
                 onDoubleClick={() => {
-                  changeStatusHandler(i, e.status, e.task,e.date);
+                  changeStatusHandler(i, e.status, e.task, e.date);
                 }}
                 className="w-full h-full flex justify-between"
               >
                 {" "}
-              <span className="font-mono font-semibold">  {e.task}</span>
-               <small className="mr-[50px] translate-y-[23px] opacity-[50%]"> {e.date}</small>
+                <span className="font-mono font-semibold"> {e.task}</span>
+                <small className="mr-[50px] translate-y-[23px] opacity-[50%]">
+                  {" "}
+                  {e.date}
+                </small>
               </div>
-              <button onClick={() => deleteHandler(i)} className="bg-gray-800 text-white p-1 rounded-full w-10 h-10">X</button>
+              <button
+                onClick={() => deleteHandler(i)}
+                className="bg-gray-800 text-white p-1 rounded-full w-10 h-10"
+              >
+                X
+              </button>
             </motion.div>
           ) : (
             CurrList == "All" && (
@@ -183,17 +198,24 @@ const Tasks = () => {
                 className={e.status}
               >
                 <div
-                
                   onDoubleClick={() => {
-                    changeStatusHandler(i, e.status, e.task,e.date);
+                    changeStatusHandler(i, e.status, e.task, e.date);
                   }}
                   className="w-full h-full flex justify-between"
                 >
                   {" "}
-                <span className="font-mono font-semibold">  {e.task}</span>
-                 <small className="mr-[50px] translate-y-[23px] opacity-[50%]"> {e.date}</small>
+                  <span className="font-mono font-semibold"> {e.task}</span>
+                  <small className="mr-[50px] translate-y-[23px] opacity-[50%]">
+                    {" "}
+                    {e.date}
+                  </small>
                 </div>
-                <button onClick={() => deleteHandler(i)} className="bg-gray-800 text-white p-1 rounded-full w-10 h-10">X</button>
+                <button
+                  onClick={() => deleteHandler(i)}
+                  className="bg-gray-800 text-white p-1 rounded-full w-10 h-10"
+                >
+                  X
+                </button>
               </motion.div>
             )
           );
