@@ -12,6 +12,7 @@ import Tasks from "./Tasks";
 import Cursor from "./Cursor";
 import Alert from "./Alert";
 import { useSelector, useDispatch } from "react-redux";
+import CalendarApp from './Calendar';
 
 const App = () => {
   const showAlert = useSelector((state) => state.showAlert);
@@ -76,6 +77,26 @@ const App = () => {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1.5, delay: 0.5 }}
                 ></motion.video>
+              </>
+            }
+          />
+   
+          <Route
+            path="/calendar"
+            element={
+              <>
+                 <CalendarApp/> 
+                {/* <motion.video
+                  style={{ zIndex: -1 }}
+                  src="./bg2.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  className="absolute inset-0  w-full h-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1.5, delay: 0.5 }}
+                ></motion.video> */}
               </>
             }
           />
