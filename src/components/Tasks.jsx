@@ -89,41 +89,44 @@ const Tasks = () => {
               className="flex"
             >
               <div>
-              <motion.button
-                    initial={{ opacity: 0, x: -120 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 2, duration: 2 }}
-                    className="text-center ml-2 flex justify-center items-center w-[50px] rounded-full text-white bg-black"
-                    onClick={addHandler}
-                  >
-                    <VscArrowRight />
-                  </motion.button>
                 <motion.input
                   ref={Task}
                   type="text"
                   placeholder=" Add a new Task"
                   className="py-3  mb-1 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
                 />
-                 <motion.textarea 
-                   className="py-3  mb-1 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
-                   ref={descriptionTxt}
-                 id="desc" name="description" rows="4" cols="50" placeholder="Enter  description here..."></motion.textarea> 
-              
+                <motion.textarea
+                  className="py-3  mb-1 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
+                  ref={descriptionTxt}
+                  id="desc"
+                  name="description"
+                  rows="4"
+                  cols="50"
+                  placeholder="Enter  description here..."
+                ></motion.textarea>
+                <motion.input
+                  ref={DateTxt}
+                  type="date"
+                  min={CurrDate}
+                  className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
+                />
                 <div className="flex">
-                  <motion.input
-                    ref={DateTxt}
-                    type="date"
-                    min={CurrDate}
-                    className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
-                  />
                   <motion.input
                     ref={DateTxtEnd}
                     type="date"
                     min={CurrDate}
                     className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
-                  />
-                  
+                  />      <motion.button
+                  initial={{ opacity: 0, x: -120 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 2, duration: 2 }}
+                  className="text-center ml-2 flex justify-center items-center w-[50px] rounded-full text-white bg-black"
+                  onClick={addHandler}
+                >
+                  <VscArrowRight />
+                </motion.button>
                 </div>
+          
               </div>
             </motion.div>
             <motion.div
@@ -220,7 +223,7 @@ const Tasks = () => {
               >
                 <div
                   onDoubleClick={() => {
-                    changeStatusHandler(i,e);
+                    changeStatusHandler(i, e);
                   }}
                   className="w-full h-full flex justify-between"
                 >
