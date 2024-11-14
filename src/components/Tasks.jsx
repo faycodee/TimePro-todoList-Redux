@@ -18,15 +18,19 @@ const Tasks = () => {
     console.log(CurrList);
   }
   const Task = useRef();
+  const descriptionTxt = useRef();
   const DateTxt = useRef();
+  const DateTxtEnd = useRef();
   const Tasks = useSelector((state) => state.Tasks);
   const dispatch = useDispatch();
   console.log(Tasks);
   const addHandler = () => {
     let obj = {
-      task: Task.current.value,
+      titel: Task.current.value,
+      description:descriptionTxt.current.value ,
       status: "Active",
-      date: myFormatDate(DateTxt.current.value),
+      start: myFormatDate(DateTxt.current.value),
+      end: myFormatDate(DateTxtEnd.current.value),
     };
     dispatch({ type: "ADD", newTask: obj });
     dispatch({ type: "SHOWALERT", msg: "Add Successfuly !" });

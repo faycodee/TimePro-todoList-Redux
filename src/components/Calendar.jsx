@@ -11,6 +11,7 @@ import "@schedule-x/theme-default/dist/index.css";
 import { createDragAndDropPlugin } from "@schedule-x/drag-and-drop";
 import { createEventModalPlugin } from "@schedule-x/event-modal";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function CalendarApp() {
   const [CurrDate, setDate] = useState(() => {
@@ -20,7 +21,7 @@ function CalendarApp() {
     const day = now.getDate();
     return `${year}-${month}-${day}`;
   });
-
+  const Tasks = useSelector(state=>state.Tasks)
   const plugins = [createEventModalPlugin(), createDragAndDropPlugin()];
   const calendar = useCalendarApp(
     {
@@ -30,22 +31,7 @@ function CalendarApp() {
         // createViewWeek(),
         createViewMonthAgenda(),
       ],
-      events: [
-        {
-          id: 1,
-          title: " myyyyy  Event 1",
-          start: "2024-11-16 00:00",
-          end: "2024-11-16 08:00",
-          description: "",
-        },
-        {
-          id: 2,
-          title: " myyyyy  Event 1",
-          start: "2024-11-16 00:00",
-          end: "2024-11-16 08:00",
-          description: "",
-        },
-      ],
+      events: Tasks
     },
     plugins
   );
