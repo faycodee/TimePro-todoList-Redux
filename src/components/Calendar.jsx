@@ -33,7 +33,7 @@ function CalendarApp() {
         // createViewWeek(),
         createViewMonthAgenda(),
       ],
-      events: Tasks
+      events: Tasks.filter((e)=>e.status=="Active")
     },
     plugins
   );
