@@ -122,9 +122,7 @@ const Nav = () => {
         <li className="hover:text-green-500 cursor-pointer transition-colors">
           <NavLink to={"/calendar"}>Calendar</NavLink>
         </li>
-        <li className="hover:text-green-500 cursor-pointer transition-colors">
-          <NavLink to={"/projects"}>Projects</NavLink>
-        </li>
+       
       </ul>
     </nav>
   );

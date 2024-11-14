@@ -11,8 +11,10 @@ const Tasks = () => {
     const year = now.getFullYear();
     const month = now.getMonth();
     const day = now.getDate();
+    // return `${now}`;
     return `${year}-${month}-${day}`;
   });
+
 
   {
     console.log(CurrList);
@@ -51,21 +53,24 @@ const Tasks = () => {
   const changeStatusHandler = (
     position,
     { title, description, status, start, end }
+
   ) => {
-    // alert(sts)
+    alert(status)
+    let st = (status==="Active") ? "Completed" : "Active";
+    alert(st)
     let nTask = {
-      title,
-      description,
-      status: "Active" ? "Completed" : "Active",
-      start,
-      end,
+      title:title,
+      description:description,
+      status: st,
+      start:start,
+      end:end,
     };
-    // alert(nTask.status)
+    alert(nTask.status)
     dispatch({ type: "UPDATE", pos: position, nTask: nTask });
     dispatch({
       type: "SHOWALERT",
-      msg: nTask.status == "Completed" ? "Done !" : "Working ...",
-      clr: sts == "Active" ? "rgb(214, 255, 152)" : "rgb(255, 152, 152)",
+      msg: nTask.status === "Completed" ? "Done !" : "Working ...",
+      clr: status == "Active" ? "rgb(214, 255, 152)" : "rgb(255, 152, 152)",
     }),
       setTimeout(() => dispatch({ type: "HIDEALERT" }), 3000);
   };

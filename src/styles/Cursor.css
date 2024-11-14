@@ -21,3 +21,6 @@ body{
     z-index: 100000;
     pointer-events: none;
   }
+  .sx__date-grid-event--right-overflow{
+    background-color: green;
+  }

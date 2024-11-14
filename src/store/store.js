@@ -37,13 +37,7 @@ const mystate = {
       start:`${year}-${month+1}-${day}`,
       end: `${year}-${month+1}-${day}`,
     },
-    {
-      title: "learn React js",
-      description: "",
-      status: "Completed",
-      start:`${year}-${month+1}-${day}`,
-      end: `${year}-${month+1}-${day + 1}`,
-    },
+
    
   ],
   Alert: {

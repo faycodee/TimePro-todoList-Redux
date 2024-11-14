@@ -5,7 +5,7 @@ body {
   cursor: none;
   background-color: rgb(212, 212, 212);
 }
-input::placeholder {
+input::placeholder ,textarea::placeholder{
   color: rgb(0, 0, 0);
   opacity: 0.5;
 }
