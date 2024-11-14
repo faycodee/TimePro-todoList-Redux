@@ -5,44 +5,44 @@ const mystate = {
   Tasks: [
     {
       title: "learn Three js",
+      description: "",
       status: "Active",
       start: "11-11-2024",
-      end: "2024-11-16 08:00",
-      description: "",
+      end: "2024-11-16 ",
 
     },
-    {
-      title: "learn GSAP js",
-      status: "Active",
-      start: "11-11-2024",
-      end: "2024-11-16 08:00",
-      description: "",
+    // {
+    //   title: "learn GSAP js",
+    //   description: "",
+    //   status: "Active",
+    //   start: "11-11-2024",
+    //   end: "2024-11-16 08:00",
 
-    },
-    {
-      title: "learn Parallax js",
-      status: "Active",
-      start: "11-11-2024",
-      end: "2024-11-16 08:00",
-      description: "",
+    // },
+    // {
+    //   title: "learn Parallax js",
+    //   description: "",
+    //   status: "Active",
+    //   start: "11-11-2024",
+    //   end: "2024-11-16 08:00",
 
-    },
-    {
-      title: "learn React js",
-      status: "Completed",
-      start: "25-10-2024",
-      end: "2024-11-16 08:00",
-      description: "",
+    // },
+    // {
+    //   title: "learn React js",
+    //   description: "",
+    //   status: "Completed",
+    //   start: "25-10-2024",
+    //   end: "2024-11-16 08:00",
 
-    },
-    {
-      title: "learn FramerMotion js",
-      status: "Completed",
-      start: "2-10-2024",
-      end: "2024-20-16 08:00",
-      description: "",
+    // },
+    // {
+    //   title: "learn FramerMotion js",
+    //   description: "",
+    //   status: "Completed",
+    //   start: "2-10-2024",
+    //   end: "2024-20-16 08:00",
 
-    }
+    // }
 
   ],
   Alert: {

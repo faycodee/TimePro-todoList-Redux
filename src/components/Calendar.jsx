@@ -22,6 +22,8 @@ function CalendarApp() {
     return `${year}-${month}-${day}`;
   });
   const Tasks = useSelector(state=>state.Tasks)
+  console.log(Tasks);
+  
   const plugins = [createEventModalPlugin(), createDragAndDropPlugin()];
   const calendar = useCalendarApp(
     {

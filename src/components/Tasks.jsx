@@ -30,7 +30,7 @@ const Tasks = () => {
       description: descriptionTxt.current.value,
       status: "Active",
       start: myFormatDate(DateTxt.current.value),
-      end: myFormatDate(DateTxtEnd.current.value),
+      end: myFormatDateEnd(DateTxtEnd.current.value),
     };
     dispatch({ type: "ADD", newTask: obj });
     dispatch({ type: "SHOWALERT", msg: "Add Successfuly !" });
@@ -39,6 +39,10 @@ const Tasks = () => {
   const myFormatDate = (inputDate) => {
     const [year, month, day] = inputDate.split("-");
     return `${day}-${month}-${year}`;
+  };
+  const myFormatDateEnd = (inputDate) => {
+    const [year, month, day] = inputDate.split("-");
+    return `${year}-${month}-${day}`;
   };
 
   const sort = () => {
