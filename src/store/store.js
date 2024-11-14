@@ -1,49 +1,50 @@
 import { createStore } from "redux";
 import { produce } from "immer";
 import { Return } from "three/webgpu";
+const now = new Date();
+const year = now.getFullYear();
+const month = now.getMonth();
+const day = now.getDate();
+
+// return `${year}-${month}-${day+Math.floor(Math.random() * 4) + 1}`;
 const mystate = {
   Tasks: [
     {
       title: "learn Three js",
       description: "",
       status: "Active",
-      start: "11-11-2024",
-      end: "2024-11-16 ",
-
+      start: `${year}-${month + 1}-${day}`,
+      end: `${year}-${month + 1}-${day }`,
     },
-    // {
-    //   title: "learn GSAP js",
-    //   description: "",
-    //   status: "Active",
-    //   start: "11-11-2024",
-    //   end: "2024-11-16 08:00",
-
-    // },
-    // {
-    //   title: "learn Parallax js",
-    //   description: "",
-    //   status: "Active",
-    //   start: "11-11-2024",
-    //   end: "2024-11-16 08:00",
-
-    // },
-    // {
-    //   title: "learn React js",
-    //   description: "",
-    //   status: "Completed",
-    //   start: "25-10-2024",
-    //   end: "2024-11-16 08:00",
-
-    // },
-    // {
-    //   title: "learn FramerMotion js",
-    //   description: "",
-    //   status: "Completed",
-    //   start: "2-10-2024",
-    //   end: "2024-20-16 08:00",
-
-    // }
-
+    {
+      title: "learn GSAP js",
+      description: "",
+      status: "Active",
+      start: `${year}-${month + 1}-${day}`,
+      end: `${year}-${month + 1}-${day +2}`,
+    },
+    {
+      title: "learn Parallax js",
+      description: "",
+      status: "Active",
+      start:`${year}-${month+1}-${day}`,
+      end: `${year}-${month+1}-${day+ 5}`,
+    },
+    {
+      title: "learn FramerMotion js",
+      description: "",
+      status: "Completed",
+      start:`${year}-${month+1}-${day}`,
+      end: `${year}-${month+1}-${day}`,
+    },
+    {
+      title: "learn React js",
+      description: "",
+      status: "Completed",
+      start:`${year}-${month+1}-${day}`,
+      end: `${year}-${month+1}-${day + 1}`,
+    },
+   
   ],
   Alert: {
     showAlert: false,

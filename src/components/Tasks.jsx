@@ -199,10 +199,16 @@ const Tasks = () => {
               >
                 {" "}
                 <span className="font-mono font-semibold"> {e.title}</span>
-                <small className="mr-[50px] translate-y-[23px] opacity-[50%]">
-                  {" "}
-                  {e.start}
-                </small>
+                <div>
+                  <small className="mr-[50px] translate-y-[23px] opacity-[50%] flex text-[10px]">
+                    {"start : "}
+                    {e.start}
+                  </small>
+                  <small className="mr-[50px] translate-y-[23px] opacity-[50%] flex text-[10px]">
+                    {"end : "}
+                    {e.end}
+                  </small>
+                </div>
               </div>
               <button
                 onClick={() => deleteHandler(i)}
@@ -228,11 +234,17 @@ const Tasks = () => {
                   className="w-full h-full flex justify-between"
                 >
                   {" "}
-                  <span className="font-mono font-semibold"> {e.title}</span>
-                  <small className="mr-[50px] translate-y-[23px] opacity-[50%]">
-                    {" "}
-                    {e.start}
-                  </small>
+                  <span className="font-mono font-semibold"> {e.title} </span>
+                  <div>
+                    <small className="mr-[50px] translate-y-[23px] opacity-[50%] flex text-[10px]">
+                      {"start : "}
+                      {e.start}
+                    </small>
+                    <small className="mr-[50px] translate-y-[23px] opacity-[50%] flex text-[10px]">
+                      {"end : "}
+                      {e.end}
+                    </small>
+                  </div>
                 </div>
                 <button
                   onClick={() => deleteHandler(i)}
