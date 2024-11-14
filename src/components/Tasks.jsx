@@ -26,8 +26,8 @@ const Tasks = () => {
   console.log(Tasks);
   const addHandler = () => {
     let obj = {
-      titel: Task.current.value,
-      description:descriptionTxt.current.value ,
+      title: Task.current.value,
+      description: descriptionTxt.current.value,
       status: "Active",
       start: myFormatDate(DateTxt.current.value),
       end: myFormatDate(DateTxtEnd.current.value),
@@ -48,12 +48,17 @@ const Tasks = () => {
   const deleteHandler = (position) => {
     confirm("Are you sure ?") && dispatch({ type: "DELETE", pos: position });
   };
-  const changeStatusHandler = (position, sts, tsk, dt) => {
+  const changeStatusHandler = (
+    position,
+    { title, description, status, start, end }
+  ) => {
     // alert(sts)
     let nTask = {
-      task: tsk,
-      status: sts == "Active" ? "Completed" : "Active",
-      date: dt,
+      title,
+      description,
+      status: "Active" ? "Completed" : "Active",
+      start,
+      end,
     };
     // alert(nTask.status)
     dispatch({ type: "UPDATE", pos: position, nTask: nTask });
@@ -84,20 +89,7 @@ const Tasks = () => {
               className="flex"
             >
               <div>
-                <motion.input
-                  ref={Task}
-                  type="text"
-                  placeholder=" Add a new Task"
-                  className="py-3  mb-1 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
-                />
-                <div className="flex">
-                  <motion.input
-                    ref={DateTxt}
-                    type="date"
-                    min={CurrDate}
-                    className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
-                  />
-                  <motion.button
+              <motion.button
                     initial={{ opacity: 0, x: -120 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 2, duration: 2 }}
@@ -106,6 +98,31 @@ const Tasks = () => {
                   >
                     <VscArrowRight />
                   </motion.button>
+                <motion.input
+                  ref={Task}
+                  type="text"
+                  placeholder=" Add a new Task"
+                  className="py-3  mb-1 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
+                />
+                 <motion.textarea 
+                   className="py-3  mb-1 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
+                   ref={descriptionTxt}
+                 id="desc" name="description" rows="4" cols="50" placeholder="Enter  description here..."></motion.textarea> 
+              
+                <div className="flex">
+                  <motion.input
+                    ref={DateTxt}
+                    type="date"
+                    min={CurrDate}
+                    className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
+                  />
+                  <motion.input
+                    ref={DateTxtEnd}
+                    type="date"
+                    min={CurrDate}
+                    className="py-3 px-6 w-[400px] bg-transparent border border-5 rounded-xl text-black border-gray-100 "
+                  />
+                  
                 </div>
               </div>
             </motion.div>
@@ -173,15 +190,15 @@ const Tasks = () => {
             >
               <div
                 onDoubleClick={() => {
-                  changeStatusHandler(i, e.status, e.task, e.date);
+                  changeStatusHandler(i, e);
                 }}
                 className="w-full h-full flex justify-between"
               >
                 {" "}
-                <span className="font-mono font-semibold"> {e.task}</span>
+                <span className="font-mono font-semibold"> {e.title}</span>
                 <small className="mr-[50px] translate-y-[23px] opacity-[50%]">
                   {" "}
-                  {e.date}
+                  {e.start}
                 </small>
               </div>
               <button
@@ -203,15 +220,15 @@ const Tasks = () => {
               >
                 <div
                   onDoubleClick={() => {
-                    changeStatusHandler(i, e.status, e.task, e.date);
+                    changeStatusHandler(i,e);
                   }}
                   className="w-full h-full flex justify-between"
                 >
                   {" "}
-                  <span className="font-mono font-semibold"> {e.task}</span>
+                  <span className="font-mono font-semibold"> {e.title}</span>
                   <small className="mr-[50px] translate-y-[23px] opacity-[50%]">
                     {" "}
-                    {e.date}
+                    {e.start}
                   </small>
                 </div>
                 <button

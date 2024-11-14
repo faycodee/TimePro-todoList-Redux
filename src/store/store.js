@@ -4,7 +4,7 @@ import { Return } from "three/webgpu";
 const mystate = {
   Tasks: [
     {
-      task: "learn Three js",
+      title: "learn Three js",
       status: "Active",
       start: "11-11-2024",
       end: "2024-11-16 08:00",
