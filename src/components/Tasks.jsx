@@ -3,6 +3,7 @@ import "../styles/index.css";
 import { VscArrowRight } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
+import { Reorder } from "framer-motion"
 const Tasks = () => {
   const myList = useRef();
   const [CurrList, setCurrList] = useState("All");
@@ -24,6 +25,7 @@ const Tasks = () => {
   const DateTxt = useRef();
   const DateTxtEnd = useRef();
   const Tasks = useSelector((state) => state.Tasks);
+  const [Taskss,setTaskss] =useState(Tasks)
   const dispatch = useDispatch();
   console.log(Tasks);
   const addHandler = () => {
@@ -46,7 +48,7 @@ const Tasks = () => {
   const sort = () => {
     dispatch({ type: "SORT" });
   };
-  sort();
+  // sort();
   const deleteHandler = (position) => {
     confirm("Are you sure ?") && dispatch({ type: "DELETE", pos: position });
   };
@@ -74,6 +76,9 @@ const Tasks = () => {
     }),
       setTimeout(() => dispatch({ type: "HIDEALERT" }), 3000);
   };
+  const setTasks =()=>{
+
+  }
   return (
     <div className="flex  h-[90%] max-lg:flex-col max-lg:justify-center">
       <div className="relative w-[50%] flex flex-row   ">
@@ -179,18 +184,20 @@ const Tasks = () => {
           </div>
         </div>
       </div>
-      <motion.div
+      
+      <Reorder.Group
+        values={Taskss}
+        onReorder={setTaskss}
         ref={myList}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 5, delay: 2 }}
         className="relative w-[50%] flex flex-col  p-10   shadow-2xl   rounded-2xl listTasks max-lg:w-[100%] "
       >
-        {Tasks.map((e, i) => {
+        {Taskss.map((e, i) => {
           return e.status == CurrList ? (
-            <motion.div
-              drag={true}
-              dragConstraints={myList}
+            <Reorder.Item>
+              <motion.div
               initial={{ x: -40 }}
               animate={{ x: 0 }}
               transition={{ duration: 3, delay: i * 0.08 }}
@@ -222,11 +229,11 @@ const Tasks = () => {
                 X
               </button>
             </motion.div>
+            </Reorder.Item>
           ) : (
             CurrList == "All" && (
-              <motion.div
-                drag={true}
-                dragConstraints={myList}
+         
+              <Reorder.Item value={e} key={e}
                 initial={{ x: -40 }}
                 animate={{ x: 0 }}
                 transition={{ duration: 3, delay: i * 0.000004 }}
@@ -257,11 +264,11 @@ const Tasks = () => {
                 >
                   X
                 </button>
-              </motion.div>
+              </Reorder.Item> 
             )
           );
         })}
-      </motion.div>
+      </Reorder.Group>
     </div>
   );
 };

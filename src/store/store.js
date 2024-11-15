@@ -48,6 +48,10 @@ const mystate = {
 };
 const Render = (state = mystate, action) => {
   switch (action.type) {
+    case "SET":
+      return produce(state, (draftState) => {
+        draftState.Tasks.unshift(action.newTask);
+      });
     case "ADD":
       return produce(state, (draftState) => {
         draftState.Tasks.unshift(action.newTask);
