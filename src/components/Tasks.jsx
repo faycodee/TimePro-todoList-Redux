@@ -3,6 +3,7 @@ import "../styles/index.css";
 import { VscArrowRight } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
+import {Reorder} from "framer-motion"
 const Tasks = () => {
   const myList = useRef();
   const [CurrList, setCurrList] = useState("All");
@@ -12,7 +13,7 @@ const Tasks = () => {
     const month = now.getMonth();
     const day = now.getDate();
     // return `${now}`;
-    return `${year}-${month}-${day}`;
+    return `${year}-${month+1}-${day}`;
   });
 
 
@@ -55,9 +56,9 @@ const Tasks = () => {
     { title, description, status, start, end }
 
   ) => {
-    alert(status)
+    // alert(status)
     let st = (status==="Active") ? "Completed" : "Active";
-    alert(st)
+    // alert(st)
     let nTask = {
       title:title,
       description:description,
@@ -65,7 +66,7 @@ const Tasks = () => {
       start:start,
       end:end,
     };
-    alert(nTask.status)
+    // alert(nTask.status)
     dispatch({ type: "UPDATE", pos: position, nTask: nTask });
     dispatch({
       type: "SHOWALERT",
@@ -188,13 +189,14 @@ const Tasks = () => {
       >
         {Tasks.map((e, i) => {
           return e.status == CurrList ? (
-            <motion.div
-              drag={true}
-              dragConstraints={myList}
+            <Reorder.div
+              // drag={true}
+              // dragConstraints={myList}
               initial={{ x: -40 }}
               animate={{ x: 0 }}
               transition={{ duration: 3, delay: i * 0.08 }}
               className={CurrList}
+          
             >
               <div
                 onDoubleClick={() => {
@@ -221,7 +223,7 @@ const Tasks = () => {
               >
                 X
               </button>
-            </motion.div>
+            </Reorder.div>
           ) : (
             CurrList == "All" && (
               <motion.div
