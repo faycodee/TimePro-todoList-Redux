@@ -3,7 +3,7 @@ import "../styles/index.css";
 import { VscArrowRight } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
-import { Reorder } from "framer-motion"
+import { Reorder } from "framer-motion";
 const Tasks = () => {
   const myList = useRef();
   const [CurrList, setCurrList] = useState("All");
@@ -16,7 +16,6 @@ const Tasks = () => {
     return `${year}-${month}-${day}`;
   });
 
-
   {
     console.log(CurrList);
   }
@@ -25,7 +24,7 @@ const Tasks = () => {
   const DateTxt = useRef();
   const DateTxtEnd = useRef();
   const Tasks = useSelector((state) => state.Tasks);
-  const [Taskss,setTaskss] =useState(Tasks)
+  const [Taskss, setTaskss] = useState(Tasks);
   const dispatch = useDispatch();
   console.log(Tasks);
   const addHandler = () => {
@@ -55,19 +54,19 @@ const Tasks = () => {
   const changeStatusHandler = (
     position,
     { title, description, status, start, end }
-
   ) => {
-    alert(status)
-    let st = (status==="Active") ? "Completed" : "Active";
-    alert(st)
+    // alert(status)
+    let st = status === "Active" ? "Completed" : "Active";
+    // alert(st)
     let nTask = {
-      title:title,
-      description:description,
+      title: title,
+      description: description,
       status: st,
-      start:start,
-      end:end,
+      start: start,
+      end: end,
     };
-    alert(nTask.status)
+    // alert(nTask.status)
+
     dispatch({ type: "UPDATE", pos: position, nTask: nTask });
     dispatch({
       type: "SHOWALERT",
@@ -76,9 +75,7 @@ const Tasks = () => {
     }),
       setTimeout(() => dispatch({ type: "HIDEALERT" }), 3000);
   };
-  const setTasks =()=>{
-
-  }
+  const setTasks = () => {};
   return (
     <div className="flex  h-[90%] max-lg:flex-col max-lg:justify-center">
       <div className="relative w-[50%] flex flex-row   ">
@@ -184,7 +181,7 @@ const Tasks = () => {
           </div>
         </div>
       </div>
-      
+
       <Reorder.Group
         values={Taskss}
         onReorder={setTaskss}
@@ -194,46 +191,49 @@ const Tasks = () => {
         transition={{ duration: 5, delay: 2 }}
         className="relative w-[50%] flex flex-col  p-10   shadow-2xl   rounded-2xl listTasks max-lg:w-[100%] "
       >
-        {Taskss.map((e, i) => {
+        { Taskss.map((e, i) => {
           return e.status == CurrList ? (
             <Reorder.Item>
               <motion.div
-              initial={{ x: -40 }}
-              animate={{ x: 0 }}
-              transition={{ duration: 3, delay: i * 0.08 }}
-              className={CurrList}
-            >
-              <div
-                onDoubleClick={() => {
-                  changeStatusHandler(i, e);
-                }}
-                className="w-full h-full flex justify-between"
+               value={e}
+               key={e}
+                initial={{ x: -40 }}
+                animate={{ x: 0 }}
+                transition={{ duration: 3, delay: i * 0.08 }}
+                className={CurrList}
               >
-                {" "}
-                <span className="font-mono font-semibold"> {e.title}</span>
-                <div>
-                  <small className="mr-[50px] translate-y-[23px] opacity-[50%] flex text-[10px]">
-                    {"start : "}
-                    {e.start}
-                  </small>
-                  <small className="mr-[50px] translate-y-[23px] opacity-[50%] flex text-[10px]">
-                    {"end : "}
-                    {e.end}
-                  </small>
+                <div
+                  onDoubleClick={() => {
+                    changeStatusHandler(i, e);
+                  }}
+                  className="w-full h-full flex justify-between"
+                >
+                  {" "}
+                  <span className="font-mono font-semibold"> {e.title}</span>
+                  <div>
+                    <small className="mr-[50px] translate-y-[23px] opacity-[50%] flex text-[10px]">
+                      {"start : "}
+                      {e.start}
+                    </small>
+                    <small className="mr-[50px] translate-y-[23px] opacity-[50%] flex text-[10px]">
+                      {"end : "}
+                      {e.end}
+                    </small>
+                  </div>
                 </div>
-              </div>
-              <button
-                onClick={() => deleteHandler(i)}
-                className="bg-gray-800 text-white p-1 rounded-full w-10 h-10"
-              >
-                X
-              </button>
-            </motion.div>
+                <button
+                  onClick={() => deleteHandler(i)}
+                  className="bg-gray-800 text-white p-1 rounded-full w-10 h-10"
+                >
+                  X
+                </button>
+              </motion.div>
             </Reorder.Item>
           ) : (
             CurrList == "All" && (
-         
-              <Reorder.Item value={e} key={e}
+              <Reorder.Item
+                value={e}
+                key={e}
                 initial={{ x: -40 }}
                 animate={{ x: 0 }}
                 transition={{ duration: 3, delay: i * 0.000004 }}
@@ -264,7 +264,7 @@ const Tasks = () => {
                 >
                   X
                 </button>
-              </Reorder.Item> 
+              </Reorder.Item>
             )
           );
         })}
