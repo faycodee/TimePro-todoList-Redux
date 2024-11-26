@@ -9,7 +9,6 @@ input::placeholder ,textarea::placeholder{
   color: rgb(0, 0, 0);
   opacity: 0.5;
 }
-
 .active {
   color: rgb(34 197 94);
 }
