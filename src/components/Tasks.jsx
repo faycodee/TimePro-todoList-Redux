@@ -15,7 +15,6 @@ const Tasks = () => {
     return `${year}-${month}-${day}`;
   });
 
-
   {
     console.log(CurrList);
   }
@@ -53,19 +52,17 @@ const Tasks = () => {
   const changeStatusHandler = (
     position,
     { title, description, status, start, end }
-
   ) => {
-    alert(status)
-    let st = (status==="Active") ? "Completed" : "Active";
-    alert(st)
+    let st = status === "Active" ? "Completed" : "Active";
+
     let nTask = {
-      title:title,
-      description:description,
+      title: title,
+      description: description,
       status: st,
-      start:start,
-      end:end,
+      start: start,
+      end: end,
     };
-    alert(nTask.status)
+
     dispatch({ type: "UPDATE", pos: position, nTask: nTask });
     dispatch({
       type: "SHOWALERT",
